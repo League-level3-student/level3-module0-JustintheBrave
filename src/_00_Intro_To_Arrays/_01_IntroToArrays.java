@@ -5,9 +5,9 @@ import java.util.Random;
 public class _01_IntroToArrays {
     public static void main(String[] args) {
         // 1. declare and Initialize an array 5 Strings
-
+    	String idk [] = new String [5];
         // 2. print the third element in the array
-
+    	System.out.println(idk[2]);
         // 3. set the third element to a different value
 
         // 4. print the third element again
