@@ -10,18 +10,20 @@ public class _02_RobotRace {
     // 1. make a main method
 	static Robot rob[]=new Robot[5];
 	static int running;
+	
 		public static void main(String[] args) {
         // 2. create an array of 5 robots.
 			
 		// 3. use a for loop to initialize the robots.
 			for (int i = 0; i < rob.length; i++) {
-				rob [i] = new Robot();
-				rob[i].setSpeed(50);
+				rob [i] = new Robot("mini");
+				rob[i].setSpeed(100);
 			}
         // 4. make each robot start at the bottom of the screen, side by side, facing up
 			for (int i = 0; i < rob.length; i++) {
-				rob[i].setY(500);
-				rob[i].setX(i*200+50);
+				rob[i].setY(250);
+				rob[i].setX(505);
+				rob[i].setAngle(90);
 			}
         // 5. use another for loop to iterate through the array and make each robot move
         // a random amount less than 50.
@@ -30,7 +32,7 @@ public class _02_RobotRace {
 			boolean racing = true;
 			while(racing) {
 			for (running = 0; running < rob.length; running++) {
-				run = ran.nextInt(51);
+				run = ran.nextInt(21);
 				for (int i = 0;  i<run; i++) {
 					move();	
 				}
