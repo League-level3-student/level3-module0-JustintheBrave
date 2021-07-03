@@ -14,7 +14,6 @@ import java.util.Random;
 
 public class Firework{
     public static final int GRAVITY = 1;
-    static FireworkDisplay fire = new FireworkDisplay();
 
     // 1. Create an array of Spark objects called sparks. Don't initialize it.
     Spark sparks[];
@@ -29,7 +28,7 @@ public class Firework{
     	
     	
     	for (int i = 0; i < sparks.length; i++) {
-			sparks[i]=new Spark(fire.WIDTH/2, fire.HEIGHT);
+			sparks[i]=new Spark(FireworkDisplay.WIDTH/2, FireworkDisplay.HEIGHT);
 		}
     }
 
@@ -37,8 +36,8 @@ public class Firework{
         // 4. Iterate through the sparks and reset their x and y location
         //    to their original starting point.
     		for(int i=0; i>sparks.length; i++) {
-    			sparks[i].y=0;
-    			sparks[i].x=fire.WIDTH/2;
+    			sparks[i].y=FireworkDisplay.HEIGHT;
+    			sparks[i].x=FireworkDisplay.WIDTH/2;
     			
     		}
     }
@@ -77,7 +76,7 @@ public class Firework{
 
     public void drawSparks(Graphics g) {
         // 5. Iterate through each spark
-    	for(int i=0; i>sparks.length; i++) {
+    	for(int i=0; i<sparks.length; i++) {
         // 6. Set the color to the spark's color with g.setColor()
     		g.setColor(sparks[i].color);
         // 7. Fill in an oval using the spark's x, y, and size with g.fillOval()
