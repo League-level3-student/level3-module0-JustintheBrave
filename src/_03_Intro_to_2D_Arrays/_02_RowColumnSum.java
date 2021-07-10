@@ -4,11 +4,23 @@ public class _02_RowColumnSum {
 
     public int getSumByRow(int[][] matrix, int row) {
         
-        return 0;
+    	int sum=0;
+    	
+    	for (int i = 0; i < matrix.length; i++) {
+			sum+=matrix[row][i];
+		}
+    	
+        return sum;
     }
     
     public int getSumByColumn(int[][] matrix, int col) {
-        
-        return 0;
+    	
+    	int sum=0;
+    	
+    	for (int i = 0; i < matrix.length; i++) {
+			sum+=matrix[i][col];
+		}
+    	
+        return sum;
     }
 }
