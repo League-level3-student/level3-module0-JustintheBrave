@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -31,13 +32,13 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
         // 2. Calculate the cell size.
         cellSize= h/cpr;
         // 3a. Initialize the cell array to the appropriate size.
-        cells=new Cell[w][h];
+        cells=new Cell[cpr][cpr];
         // 3b. Iterate through the array and initialize each cell.
         //    Don't forget to consider the cell's dimensions when 
         //    passing in the location.
         for (int i = 0; i < cells.length; i++) {
 			for (int j = 0; j < cells.length; j++) {
-				cells[i][j]=new Cell(i,j, cellSize);
+				cells[i][j]=new Cell(i*cellSize,j*cellSize, cellSize);
 			}
 		}	
     }
@@ -93,10 +94,10 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
     public void step() {
         // 7. iterate through cells and fill in the livingNeighbors array
         //    using the getLivingNeighbors method.
-        int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
+        int[][] livingNeighbors = new int[cells.length][cells[0].length];
         
-        for (int i = 0; i < cells.length; i++) {
-			for (int j = 0; j < cells.length; j++) {
+        for (int i = 0; i < livingNeighbors.length; i++) {
+			for (int j = 0; j < livingNeighbors.length; j++) {
 				livingNeighbors[i][j]= getLivingNeighbors(cells, i, j);
 			}
 		}
@@ -104,35 +105,10 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
         
         for (int i = 0; i < cells.length; i++) {
 			for (int j = 0; j < cells.length; j++) {
-				if(cells[i][j].isAlive==true && livingNeighbors[i][j]<2) {
-					cells[i][j].isAlive=false;
-				}
+				cells[i][j].liveOrDie(livingNeighbors[i][j]);
 			}
 		}
         
-        for (int i = 0; i < cells.length; i++) {
-			for (int j = 0; j < cells.length; j++) {
-				if(cells[i][j].isAlive==true && livingNeighbors[i][j]==2 || livingNeighbors[i][j]==3) {
-					cells[i][j].isAlive=true;
-				}
-			}
-		}
-        
-        for (int i = 0; i < cells.length; i++) {
-			for (int j = 0; j < cells.length; j++) {
-				if(cells[i][j].isAlive==true && livingNeighbors[i][j]>3) {
-					cells[i][j].isAlive=false;
-				}
-			}
-		}
-        
-        for (int i = 0; i < cells.length; i++) {
-			for (int j = 0; j < cells.length; j++) {
-				if(cells[i][j].isAlive==false && livingNeighbors[i][j]==3) {
-					cells[i][j].isAlive=true;
-				}
-			}
-		}
         
         repaint();
     }
@@ -144,6 +120,11 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
     //        6   7    8
     public int getLivingNeighbors(Cell[][] cells, int cellRow, int cellCol){
         int livingNeighbors = 0;
+        
+//        if(cellRow>49||cellCol>49) {
+//        	JOptionPane.showMessageDialog(null, cellRow + ", " + cellCol);
+//        	System.exit(0);
+//        } 
         
         if(cellRow != 0) {
             if(cells[cellRow - 1][cellCol].isAlive) livingNeighbors++;
